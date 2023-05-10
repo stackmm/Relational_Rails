@@ -24,12 +24,12 @@ Table -> Medications
 ################################
 
 Iteration 1:
-User Story 1, Parent Index 
+User Story 1, Pharmacy Index # shows ALL ecords of one model
 
-For each parent table
+For each Pharmacy table
 As a visitor
-When I visit '/parents'
-Then I see the name of each parent record in the system
+When I visit '/pharmacies'
+Then I see the name of each pharmacy record in the system
 
 
 User Story 2, Parent Show 
