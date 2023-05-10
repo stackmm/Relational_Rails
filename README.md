@@ -1,12 +1,35 @@
 # README
+Table -> Pharmacies
+- auto-generated ID (PRIMARY KEY)
+- name:string
+- pharmacist_in_charge:string
+- num_employees:integer
+- city:string
+- open_24_hours:boolean
+- created_at:datetime
+- updated_at:datetime
+
+Medications belong to a Pharmacy
+Table -> Medications
+- auto-generated ID (PRIMARY KEY)
+- pharmacy_id:integer (FOREIGN KEY)
+- name:string
+- strength:string
+- dosage_form:string
+- quantity:integer
+- in_stock:boolean
+- created_at:datetime
+- updated_at:datetime
+
+################################
+
 Iteration 1:
+User Story 1, Pharmacy Index # shows ALL ecords of one model
 
-User Story 1, Parent Index 
-
-For each parent table
+For each Pharmacy table
 As a visitor
-When I visit '/parents'
-Then I see the name of each parent record in the system
+When I visit '/pharmacies'
+Then I see the name of each pharmacy record in the system
 
 
 User Story 2, Parent Show 
