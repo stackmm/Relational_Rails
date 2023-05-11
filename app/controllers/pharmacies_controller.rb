@@ -1,6 +1,6 @@
 class PharmaciesController < ApplicationController
   def index
-    @pharmacies = Pharmacy.sorted
+    @pharmacies = Pharmacy.sorted_by_created
   end
 
   def show
