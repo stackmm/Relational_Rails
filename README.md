@@ -22,16 +22,19 @@ Table -> Medications
 - updated_at:datetime
 
 ################################
-
 Iteration 1:
-User Story 1, Pharmacy Index # shows ALL ecords of one model
+################################
 
-For each Pharmacy table
+[x] done
+
+User Story 1, Parent Index 
+
+For each parent table
 As a visitor
-When I visit '/pharmacies'
-Then I see the name of each pharmacy record in the system
+When I visit '/parents'
+Then I see the name of each parent record in the system
 
-
+[ ] done
 User Story 2, Parent Show 
 
 As a visitor
