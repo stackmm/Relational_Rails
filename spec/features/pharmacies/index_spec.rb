@@ -5,10 +5,11 @@ RSpec.describe "/pharmacies", type: :feature do
   let!(:pharmacy_2) { Pharmacy.create!(name: "UCHealth", pharmacist_in_charge: "Max Anderson", num_employees: 22, city: "Denver", open_24_hours: false)}  
   
   # User Story 1
-  it "displays the name of each Pharmacy record in the system" do
+  it "#index displays the name of each Pharmacy record in the system" do
     visit "/pharmacies"
 
     expect(page).to have_content(pharmacy_1.name)
     expect(page).to have_content(pharmacy_2.name)
+
   end
 end
