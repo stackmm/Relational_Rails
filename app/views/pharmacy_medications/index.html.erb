@@ -1,3 +1,5 @@
+<%= link_to "Pharmacies", "/pharmacies" %>
+<%= link_to "Medications", "/medications" %>
 <% @medications.each do |medication| %>
   <h2><%= medication.name %></h2>
   <p>Strength: <%= medication.strength %></p>

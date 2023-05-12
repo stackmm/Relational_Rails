@@ -21,4 +21,16 @@ RSpec.describe "/medications", type: :feature do
     expect(page).to have_content("Quantity: #{medication_2.quantity}")
     expect(page).to have_content("In Stock: #{medication_2.in_stock}")
   end
+
+    # User Story 8 
+    it "displays a link to the Pharmacies Index page at top of the page" do
+      visit "/medications"
+      expect(page).to have_link("Pharmacies", href: "/pharmacies")
+    end
+  
+    # User Story 9 
+    it "displays a link to the Medications Index page at top of the page" do
+      visit "/medications"
+      expect(page).to have_link("Medications", href: "/medications")
+    end
 end

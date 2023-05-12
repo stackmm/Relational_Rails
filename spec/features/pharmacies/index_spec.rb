@@ -34,4 +34,17 @@ RSpec.describe "/pharmacies", type: :feature do
     expect(page).to have_content(pharmacy_4.created_at)
     expect(page).to have_content(pharmacy_5.created_at)
   end 
+
+  # User Story 8 
+  it "displays a link to the Pharmacies Index page at top of the page" do
+    visit "/pharmacies"
+    expect(page).to have_link("Pharmacies", href: "/pharmacies")
+  end
+
+  # User Story 9 
+  it "displays a link to the Medications Index page at top of the page" do
+    visit "/pharmacies"
+    expect(page).to have_link("Medications", href: "/medications")
+  end
+
 end

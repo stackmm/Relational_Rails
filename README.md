@@ -1,5 +1,6 @@
 # README
-Table -> Pharmacies
+[DB](https://erd.dbdesigner.net/designer/schema/0-untitled-98112fae-b9de-4969-9d6d-928c86c19457)
+1. Table -> Pharmacies
 - auto-generated ID (PRIMARY KEY)
 - name:string
 - pharmacist_in_charge:string
@@ -10,7 +11,7 @@ Table -> Pharmacies
 - updated_at:datetime
 
 Medications belong to a Pharmacy
-Table -> Medications
+1. Table -> Medications
 - auto-generated ID (PRIMARY KEY)
 - pharmacy_id:integer (FOREIGN KEY)
 - name:string
@@ -74,21 +75,21 @@ When I visit the parent index,
 I see that records are ordered by most recently created first
 And next to each of the records I see when it was created
 
-[] done
+[x] done
 User Story 7, Parent Child Count
 
 As a visitor
 When I visit a parent's show page
 I see a count of the number of children associated with this parent
 
-[] done
+[x] done
 User Story 8, Child Index Link
 
 As a visitor
 When I visit any page on the site
 Then I see a link at the top of the page that takes me to the Child Index
 
-[] done
+[x] done
 User Story 9, Parent Index Link
 
 As a visitor
