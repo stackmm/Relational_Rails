@@ -38,4 +38,11 @@ RSpec.describe "/pharmacies/:id", types: :feature do
     visit "/pharmacies/#{pharmacy_2.id}"
     expect(page).to have_content("Medication Count: 3")
   end
+
+  # User Story 10
+  it "displays a link to that pharmacy's medications page" do
+    visit "/pharmacies/#{pharmacy_1.id}"
+
+    expect(page).to have_link("Medications", href: "/pharmacies/#{pharmacy_1.id}/medications")
+  end
 end

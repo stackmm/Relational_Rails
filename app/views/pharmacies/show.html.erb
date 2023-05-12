@@ -1,9 +1,9 @@
 <%= link_to "Pharmacies", "/pharmacies" %>
-<%= link_to "Medications", "/medications" %>
+<%= link_to "Medications", "/medications" %><br>
 <h1><%= @pharmacies.name %></h1>
 <p>Pharmacist: <%= @pharmacies.pharmacist_in_charge %></p>
 <p>Number of employees: <%= @pharmacies.num_employees %></p>
 <p>Location: <%= @pharmacies.city %></p>
 <p>Open 24 Hours: <%= @pharmacies.open_24_hours %></p>
-<h4>Medication Count: <%= @pharmacies.count_medications %></h4>
-
+<p>Medication Count: <%= @pharmacies.count_medications %></p>
+<%= link_to "#{@pharmacies.name}'s Medications", "/pharmacies/#{@pharmacies.id}/medications" %>
