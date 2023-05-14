@@ -1,0 +1,18 @@
+<h1>Create New Medication</h1><br>
+<form action="/pharmacies/<%=@pharmacy.id%>/medications" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  Medication:
+  <input type='text' name="name"/><br/><br/>
+  Strength:
+  <input type='text' name="strength"/><br/><br/>
+  Dosage Form:
+  <input type='text' name="dosage_form"/><br/><br/>
+  Quantity:
+  <input type='number' name="quantity"/><br/><br/>
+  <p>In Stock:?</p>
+  <input type='radio' name='in_stock' value =true id = "true" required/>
+  <label for ="true">True</label>
+  <input type='radio' name='in_stock' value =false id = "false" />
+  <label for ="false">False</label><br/><br><br>
+  <input type="submit" value="Create Medication" id="submit"/>
+</form>

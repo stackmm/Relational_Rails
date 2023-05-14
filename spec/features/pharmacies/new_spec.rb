@@ -23,8 +23,6 @@ RSpec.describe "/pharmacies/new", type: :feature do
     fill_in("pharmacist_in_charge", with: "Steven Stackhouse")
     fill_in("num_employees", with: 7)
     fill_in("city", with: "Fort Collins")
-    #choose("open_24_hours", option: false)
-
     choose('false')
 
     click_button("Create Pharmacy")
