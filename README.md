@@ -108,7 +108,7 @@ Then I see a link to take me to that parent's `child_table_name` page ('/parents
 Iteration 2:
 ################################
 
-[ ] done
+[x] done
 User Story 11, Parent Creation 
 
 As a visitor
@@ -122,7 +122,7 @@ Then a `POST` request is sent to the '/parents' route,
 a new parent record is created,
 and I am redirected to the Parent Index page where I see the new Parent displayed.
 
-[ ] done
+[x] done
 User Story 12, Parent Update 
 
 As a visitor

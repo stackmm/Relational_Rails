@@ -6,4 +6,5 @@
 <p>Location: <%= @pharmacies.city %></p>
 <p>Open 24 Hours: <%= @pharmacies.open_24_hours %></p>
 <p>Medication Count: <%= @pharmacies.count_medications %></p>
-<%= link_to "#{@pharmacies.name}'s Medications", "/pharmacies/#{@pharmacies.id}/medications" %>
+<%= link_to "#{@pharmacies.name}'s Medications", "/pharmacies/#{@pharmacies.id}/medications" %></br></br>
+<%= link_to "Update Pharmacy", "/pharmacies/#{@pharmacies.id}/edit"%>

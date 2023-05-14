@@ -45,4 +45,5 @@ RSpec.describe "/pharmacies/:id", type: :feature do
 
     expect(page).to have_link("Medications", href: "/pharmacies/#{pharmacy_1.id}/medications")
   end
+  
 end

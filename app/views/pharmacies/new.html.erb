@@ -1,4 +1,4 @@
-<h1>Create New Pharmacy</h1></br>
+<h1>Create New Pharmacy</h1><br>
 <form action="/pharmacies" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   Pharmacy Name:
@@ -10,9 +10,9 @@
   City:
   <input type='text' name="city"/><br/><br/>
   <p>Open 24 Hours?</p>
-  <label for="true">True</label>
-  <input type='radio' id="true" value="true" name="open_24_hours"><br/>
-  <label for="false">False</label>
-  <input type='radio' id="false" value="false" name="open_24_hours"><br/><br/><br/>
+  <input type='radio' name='open_24_hours' value =true id = "true" required/>
+  <label for ="open_24_hours">True</label>
+  <input type='radio' name='open_24_hours' value =false id = "false" />
+  <label for ="open_24_hours">False</label><br/><br><br>
   <input type="submit" value="Create Pharmacy"/>
 </form>

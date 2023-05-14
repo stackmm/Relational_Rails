@@ -16,8 +16,34 @@ class PharmaciesController < ApplicationController
     else 
       open_hours = false
     end
-    
+
     pharmacy = Pharmacy.new(
+      name: params[:name],
+      pharmacist_in_charge: params[:pharmacist_in_charge],
+      num_employees: params[:num_employees],
+      city: params[:city],
+      open_24_hours: open_hours
+      )
+
+    pharmacy.save
+
+    redirect_to "/pharmacies"
+  end
+
+  def edit
+    @pharmacies = Pharmacy.find(params[:id])
+  end
+
+  def update
+    pharmacy = Pharmacy.find(params[:id])
+
+    if params[:open_24_hours]
+      open_hours = true
+    else 
+      open_hours = false
+    end
+
+    pharmacy.update(
       name: params[:name],
       pharmacist_in_charge: params[:pharmacist_in_charge],
       num_employees: params[:num_employees],
@@ -26,6 +52,6 @@ class PharmaciesController < ApplicationController
       )
     pharmacy.save
 
-    redirect_to "/pharmacies"
+    redirect_to "/pharmacies/#{pharmacy.id}"
   end
 end

@@ -23,12 +23,14 @@ RSpec.describe "/pharmacies/new", type: :feature do
     fill_in("pharmacist_in_charge", with: "Steven Stackhouse")
     fill_in("num_employees", with: 7)
     fill_in("city", with: "Fort Collins")
-    choose("open_24_hours", option: false)
+    #choose("open_24_hours", option: false)
+
+    choose('false')
 
     click_button("Create Pharmacy")
 
     expect(page).to have_content("Stackhouse Pharmacy")
-
+    
     expect(current_path).to have_content("/pharmacies")
   end
 end

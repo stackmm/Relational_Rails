@@ -1,0 +1,23 @@
+<h1><%= @pharmacies.name %></h1></br>
+<form action="/pharmacies/<%= @pharmacies.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="PATCH" />
+  Pharmacy Name:
+  <input type='text' name="name"/><br/><br/>
+  Pharmacist:
+  <input type='text' name="pharmacist_in_charge"/><br/><br/>
+  Number of Employees:
+  <input type='number' name="num_employees"/><br/><br/>
+  City:
+  <input type='text' name="city"/><br/><br/>
+  <p>Open 24 Hours?</p>
+
+
+  <input type='radio' name='open_24_hours' value =true id = "true" required <%= @pharmacies.open_24_hours ? "checked":"" %>/>
+  <label for ="open_24_hours">True</label>
+  <input type='radio' name='open_24_hours' value =false id = "false" required <%= !@pharmacies.open_24_hours ? "checked":"" %>/>
+  <label for ="open_24_hours">False</label>
+
+
+  <input type="submit" value="Submit"/>
+</form>
