@@ -11,16 +11,7 @@ class PharmaciesController < ApplicationController
   end
 
   def create
-    pharmacy = Pharmacy.new(
-      name: params[:name],
-      pharmacist_in_charge: params[:pharmacist_in_charge],
-      num_employees: params[:num_employees],
-      city: params[:city],
-      open_24_hours: params[:open_24_hours]
-      )
-
-    pharmacy.save
-
+    Pharmacy.create(pharmacy_params)
     redirect_to "/pharmacies"
   end
 
@@ -30,16 +21,16 @@ class PharmaciesController < ApplicationController
 
   def update
     pharmacy = Pharmacy.find(params[:id])
-
-    pharmacy.update({
-      name: params[:name],
-      pharmacist_in_charge: params[:pharmacist_in_charge],
-      num_employees: params[:num_employees],
-      city: params[:city],
-      open_24_hours: params[:open_24_hours]
-    })
-    pharmacy.save
-
+    pharmacy.update(pharmacy_params)
     redirect_to "/pharmacies/#{pharmacy.id}"
   end
+
+  private 
+    def pharmacy_params
+      params.permit(:name,
+                    :pharmacist_in_charge,
+                    :num_employees,
+                    :city,
+                    :open_24_hours)
+    end
 end
