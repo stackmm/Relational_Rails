@@ -27,10 +27,6 @@ class PharmaciesController < ApplicationController
 
   private 
     def pharmacy_params
-      params.permit(:name,
-                    :pharmacist_in_charge,
-                    :num_employees,
-                    :city,
-                    :open_24_hours)
+      params.permit(:name, :pharmacist_in_charge, :num_employees, :city, :open_24_hours)
     end
 end

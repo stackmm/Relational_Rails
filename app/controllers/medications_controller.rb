@@ -13,15 +13,12 @@ class MedicationsController < ApplicationController
 
   def update
     medication = Medication.find(params[:id])
-    medication.update({
-      name: params[:name],
-      strength: params[:strength],
-      dosage_form: params[:dosage_form],
-      quantity: params[:quantity],
-      in_stock: params[:in_stock]
-    })
-    medication.save
-
+    medication.update(medication_params)
     redirect_to "/medications/#{medication.id}"
   end
+
+  private
+    def medication_params
+      params.permit(:name, :strength, :dosage_form, :quantity, :in_stock)
+    end
 end
