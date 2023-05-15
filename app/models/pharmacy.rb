@@ -8,4 +8,14 @@ class Pharmacy < ApplicationRecord
   def count_medications
     medications.size
   end
+
+  def sort_alphabetically(params)
+    @medications = self.medications
+
+    if params['sort']
+      @medications = @medications.order(:name)
+    end
+    @medications
+  end
+  
 end

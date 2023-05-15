@@ -1,7 +1,8 @@
 class Pharmacies::MedicationsController < ApplicationController
   def index
     @pharmacy = Pharmacy.find(params[:id])
-    @medications = @pharmacy.medications
+    # @medications = @pharmacy.medications
+    @medications = @pharmacy.sort_alphabetically(params)
   end
 
   def new

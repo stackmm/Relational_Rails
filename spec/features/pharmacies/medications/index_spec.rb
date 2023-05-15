@@ -32,7 +32,7 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
   # end
 
   # User Story 13
-  describe "As a visitor, when I visit /pharmacies/:id/medications" do
+  describe "as a visitor, when I visit /pharmacies/:id/medications" do
     let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
     let!(:medication_1) {pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
     let!(:medication_2) {pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
@@ -76,4 +76,44 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
     end
   end
   
+  # User Story 16
+  describe "as a visitor, when I visit /pharmacies/:id/medications" do
+    let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:medication_1) {pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
+    let!(:medication_2) {pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
+    let!(:medication_3) {pharmacy_1.medications.create!(name: "Vancomycin", strength: "1000 mg", dosage_form: "intravenous solution", quantity: 32, in_stock: true)}
+    let!(:medication_4) {pharmacy_1.medications.create!(name: "Gentamicin", strength: "400 mg", dosage_form: "intravenous solution", quantity: 25, in_stock: true)}
+    let!(:medication_5) {pharmacy_1.medications.create!(name: "Amlodipine", strength: "5 mg", dosage_form: "tablet", quantity: 1200, in_stock: true)}
+    let!(:medication_6) {pharmacy_1.medications.create!(name: "Omeprazole", strength: "20 mg", dosage_form: "capsule", quantity: 350, in_stock: true)}
+
+    it "displays medications NOT in alphabetical order" do
+      visit "/pharmacies/#{pharmacy_1.id}/medications"
+
+      expect(medication_1.name).to appear_before(medication_2.name)
+      expect(medication_2.name).to appear_before(medication_3.name)
+      expect(medication_3.name).to appear_before(medication_4.name)
+      expect(medication_4.name).to appear_before(medication_5.name)
+      expect(medication_5.name).to appear_before(medication_6.name)
+    end
+
+    it "displays a link to sort medications in alphabetical order" do
+      visit "/pharmacies/#{pharmacy_1.id}/medications"
+
+      expect(page).to have_content("Sort Alphabetically")
+    end
+
+    it "when I click the link, I'm taken back to /pharmacies/:id/medications where medications are listed alphabetically" do
+      visit "/pharmacies/#{pharmacy_1.id}/medications"
+
+      click_on("Sort Alphabetically")
+
+      expect(page).to have_current_path("/pharmacies/#{pharmacy_1.id}/medications/?sort=true")
+
+      expect(medication_5.name).to appear_before(medication_1.name)
+      expect(medication_1.name).to appear_before(medication_4.name)
+      expect(medication_4.name).to appear_before(medication_6.name)
+      expect(medication_6.name).to appear_before(medication_2.name)
+      expect(medication_2.name).to appear_before(medication_3.name)
+    end
+  end
 end
