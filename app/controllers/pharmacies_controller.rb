@@ -31,19 +31,13 @@ class PharmaciesController < ApplicationController
   def update
     pharmacy = Pharmacy.find(params[:id])
 
-    if params[:open_24_hours]
-      open_hours = true
-    else 
-      open_hours = false
-    end
-
-    pharmacy.update(
+    pharmacy.update({
       name: params[:name],
       pharmacist_in_charge: params[:pharmacist_in_charge],
       num_employees: params[:num_employees],
       city: params[:city],
-      open_24_hours: open_hours
-      )
+      open_24_hours: params[:open_24_hours]
+    })
     pharmacy.save
 
     redirect_to "/pharmacies/#{pharmacy.id}"

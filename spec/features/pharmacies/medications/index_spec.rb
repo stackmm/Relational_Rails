@@ -42,7 +42,7 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
       expect(page).to have_content("Add Medication")
     end
 
-    it "when I click on the link, I am to /pharmacies/:id/medications/new" do
+    it "when I click on the link, I am taken to /pharmacies/:id/medications/new" do
       visit "/pharmacies/#{pharmacy_1.id}/medications"
 
       click_on("Add Medication")
