@@ -1,6 +1,6 @@
 class MedicationsController < ApplicationController
   def index
-    @medications = Medication.all
+    @medications = Medication.where(in_stock: true)
   end
 
   def show

@@ -22,15 +22,58 @@ RSpec.describe "/medications", type: :feature do
     expect(page).to have_content("In Stock: #{medication_2.in_stock}")
   end
 
-    # User Story 8 
-    it "displays a link to the Pharmacies Index page at top of the page" do
+  # User Story 8 
+  it "displays a link to the Pharmacies Index page at top of the page" do
+    visit "/medications"
+    expect(page).to have_link("Pharmacies", href: "/pharmacies")
+  end
+
+  # User Story 9 
+  it "displays a link to the Medications Index page at top of the page" do
+    visit "/medications"
+    expect(page).to have_link("Medications", href: "/medications")
+  end
+
+  # User Story 15
+  describe "as a visitor, when I visit /medications index page" do
+    let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:medication_1) {pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
+    let!(:medication_2) {pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
+    let!(:medication_3) {pharmacy_1.medications.create!(name: "Vancomycin", strength: "1000 mg", dosage_form: "intravenous solution", quantity: 0, in_stock: false)}
+    let!(:medication_4) {pharmacy_1.medications.create!(name: "Gentamicin", strength: "400 mg", dosage_form: "intravenous solution", quantity: 25, in_stock: true)}
+    let!(:medication_5) {pharmacy_1.medications.create!(name: "Amlodipine", strength: "5 mg", dosage_form: "tablet", quantity: 0, in_stock: false)}
+    let!(:medication_6) {pharmacy_1.medications.create!(name: "Omeprazole", strength: "20 mg", dosage_form: "capsule", quantity: 350, in_stock: true)}
+
+    it "displays only medications where in_stock is true" do
       visit "/medications"
-      expect(page).to have_link("Pharmacies", href: "/pharmacies")
+
+      expect(page).to have_content(medication_1.name)
+      expect(page).to have_content("Strength: #{medication_1.strength}")
+      expect(page).to have_content("Dosage Form: #{medication_1.dosage_form}")
+      expect(page).to have_content("Quantity: #{medication_1.quantity}")
+      expect(page).to have_content("In Stock: #{medication_1.in_stock}")
+
+      expect(page).to have_content(medication_2.name)
+      expect(page).to have_content("Strength: #{medication_2.strength}")
+      expect(page).to have_content("Dosage Form: #{medication_2.dosage_form}")
+      expect(page).to have_content("Quantity: #{medication_2.quantity}")
+      expect(page).to have_content("In Stock: #{medication_2.in_stock}")
+
+      expect(page).to have_content(medication_4.name)
+      expect(page).to have_content("Strength: #{medication_4.strength}")
+      expect(page).to have_content("Dosage Form: #{medication_4.dosage_form}")
+      expect(page).to have_content("Quantity: #{medication_4.quantity}")
+      expect(page).to have_content("In Stock: #{medication_4.in_stock}")
+
+      expect(page).to have_content(medication_6.name)
+      expect(page).to have_content("Strength: #{medication_6.strength}")
+      expect(page).to have_content("Dosage Form: #{medication_6.dosage_form}")
+      expect(page).to have_content("Quantity: #{medication_6.quantity}")
+      expect(page).to have_content("In Stock: #{medication_6.in_stock}")
+
+      expect(page).to_not have_content(medication_3.name)
+      expect(page).to_not have_content(medication_5.name)
     end
-  
-    # User Story 9 
-    it "displays a link to the Medications Index page at top of the page" do
-      visit "/medications"
-      expect(page).to have_link("Medications", href: "/medications")
-    end
+  end
+
 end
