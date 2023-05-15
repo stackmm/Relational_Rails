@@ -9,22 +9,15 @@ class Pharmacies::MedicationsController < ApplicationController
   end
 
   def create
-    
     @pharmacy = Pharmacy.find(params[:id])
 
-    if params[:in_stock]
-      stock = true
-    else 
-      stock = false
-    end
-
-    medication = @pharmacy.medications.new(
+    medication = @pharmacy.medications.new({
       name: params[:name],
       strength: params[:strength],
       dosage_form: params[:dosage_form],
       quantity: params[:quantity],
-      in_stock: stock
-      )
+      in_stock: params[:in_stock]
+    })
 
     medication.save
 

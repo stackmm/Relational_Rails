@@ -65,12 +65,14 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
       fill_in("dosage_form", with: "tablet")
       fill_in("quantity", with: 0)
       choose("false")
-
+ 
       click_on("submit")
       
       expect(page).to have_current_path("/pharmacies/#{pharmacy_1.id}/medications")
       expect(page).to have_content("Omeprazole")
       expect(page).to have_content("20 mg")
+      expect(page).to have_content(0)
+      expect(page).to have_content(false)
     end
   end
   
