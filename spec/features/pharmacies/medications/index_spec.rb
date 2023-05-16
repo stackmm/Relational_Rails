@@ -107,4 +107,29 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
       expect(medication_2.name).to appear_before(medication_3.name)
     end
   end
+
+  # User Story 21
+  describe "as a visitor, when I visit /pharmacies/:id/medications" do
+    let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:medication_1) {pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
+    let!(:medication_2) {pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
+    let!(:medication_3) {pharmacy_1.medications.create!(name: "Vancomycin", strength: "1000 mg", dosage_form: "intravenous solution", quantity: 32, in_stock: true)}
+    
+    it "displays a form that allows me to input a number value and has a submit button" do
+      visit "/pharmacies/#{pharmacy_1.id}/medications"
+      expect(page).to have_content("Return medications with quantity greater than:")
+      expect(page).to have_selector("input[id='filter_quantity']")
+    end
+
+    it "when I input a number and submit, I am brought back to /pharmacies/:id/medications with only records that meet the threshold" do
+      visit "/pharmacies/#{pharmacy_1.id}/medications"
+      fill_in('filter_quantity', with: "200")
+      click_on("submit")
+      expect(page).to have_current_path("/pharmacies/#{pharmacy_1.id}/medications/?quantity=200")
+
+      expect(page).to have_content(medication_1.name)
+      expect(page).to have_content(medication_2.name)
+      expect(page).to_not have_content(medication_3.name)
+    end
+  end
 end

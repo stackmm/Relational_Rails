@@ -2,7 +2,7 @@ class Pharmacy < ApplicationRecord
   has_many :medications
 
   def self.sorted_by_created
-    Pharmacy.order(:created_at).reverse_order
+    Pharmacy.order(created_at: :desc)
   end
 
   def count_medications
@@ -12,10 +12,14 @@ class Pharmacy < ApplicationRecord
   def sort_alphabetically(params)
     @medications = self.medications
 
+    if params['quantity']
+      @medications = @medications.where("quantity > #{params['quantity']}")
+    end
+
     if params['sort']
       @medications = @medications.order(:name)
     end
+
     @medications
   end
-  
 end
