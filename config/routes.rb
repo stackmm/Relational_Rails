@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post "/pharmacies", to: "pharmacies#create"
   get "/pharmacies/:id", to: "pharmacies#show"
   get "/pharmacies/:id/edit", to: "pharmacies#edit"
-
+  delete "/pharmacies/:id", to: "pharmacies#destroy"
   
   get "/pharmacies/:id/medications", to: "pharmacies/medications#index"
   get "/pharmacies/:id/medications/new", to: "pharmacies/medications#new"

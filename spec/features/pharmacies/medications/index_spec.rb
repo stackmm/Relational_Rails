@@ -25,12 +25,6 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
     end
   end
   
-  # it "links to each medication's show page" do
-  #   visit "/pharmacies/#{pharmacy_1.id}/medications"
-  #   click_on medication_1.name
-  #   expect(current_path).to eq("/medications/#{medication_1.id}")
-  # end
-
   # User Story 13
   describe "as a visitor, when I visit /pharmacies/:id/medications" do
     let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}

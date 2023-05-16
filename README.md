@@ -175,3 +175,50 @@ When I visit the `child_table_name` index page or a parent `child_table_name` in
 Next to every child, I see a link to edit that child's info
 When I click the link
 I should be taken to that `child_table_name` edit page where I can update its information just like in User Story 14
+
+################################
+Iteration 3:
+################################
+[x] User Story 19, Parent Delete 
+
+As a visitor
+When I visit a parent show page
+Then I see a link to delete the parent
+When I click the link "Delete Parent"
+Then a 'DELETE' request is sent to '/parents/:id',
+the parent is deleted, and all child records are deleted
+and I am redirected to the parent index page where I no longer see this parent
+
+[ ] User Story 20, Child Delete 
+
+As a visitor
+When I visit a child show page
+Then I see a link to delete the child "Delete Child"
+When I click the link
+Then a 'DELETE' request is sent to '/child_table_name/:id',
+the child is deleted,
+and I am redirected to the child index page where I no longer see this child
+
+[ ] User Story 21, Display Records Over a Given Threshold 
+
+As a visitor
+When I visit the Parent's children Index Page
+I see a form that allows me to input a number value
+When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`
+Then I am brought back to the current index page with only the records that meet that threshold shown.
+
+[ ] User Story 22, Parent Delete From Parent Index Page 
+
+As a visitor
+When I visit the parent index page
+Next to every parent, I see a link to delete that parent
+When I click the link
+I am returned to the Parent Index Page where I no longer see that parent
+
+[ ] User Story 23, Child Delete From Childs Index Page 
+
+As a visitor
+When I visit the `child_table_name` index page or a parent `child_table_name` index page
+Next to every child, I see a link to delete that child
+When I click the link
+I should be taken to the `child_table_name` index page where I no longer see that child

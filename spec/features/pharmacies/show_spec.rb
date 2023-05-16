@@ -109,4 +109,45 @@ RSpec.describe "/pharmacies/:id", type: :feature do
     end
   end
 
+  # User Story 19
+  describe "as a visitor, when I visit Pharmacy's show page" do 
+    let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:medication_1) { pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
+    let!(:medication_2) { pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
+  
+    let!(:pharmacy_2) { Pharmacy.create!(name: "UCHealth", pharmacist_in_charge: "Max Anderson", num_employees: 22, city: "Denver", open_24_hours: false)}
+    let!(:medication_3) { pharmacy_2.medications.create!(name: "Vancomycin", strength: "1000 mg", dosage_form: "intravenous solution", quantity: 100, in_stock: true)}
+    let!(:medication_4) { pharmacy_2.medications.create!(name: "Levofloxacin", strength: "500 mg", dosage_form: "intravenous solution", quantity: 30, in_stock: true)}
+
+    it "displays a Delete Pharmacy button" do
+      visit "/pharmacies/#{pharmacy_1.id}"
+      expect(page).to have_selector(:button, "Delete Pharmacy")
+    end
+
+    it "when I click Delete Pharmacy, the Pharmacy (and its medications) is deleted and redirected to /pharmacies" do
+      visit "/medications"
+      expect(page).to have_content(medication_1.name)
+      expect(page).to have_content(medication_2.name)
+      expect(page).to have_content(medication_3.name)
+      expect(page).to have_content(medication_4.name)
+
+      visit "/pharmacies"
+      expect(page).to have_content(pharmacy_1.name)
+      expect(page).to have_content(pharmacy_2.name)
+
+      visit "/pharmacies/#{pharmacy_1.id}"
+      click_button("Delete Pharmacy")
+
+      expect(page).to have_current_path("/pharmacies")
+      expect(page).to_not have_content(pharmacy_1.name)
+      expect(page).to have_content(pharmacy_2.name)
+
+      visit "/medications"
+      expect(page).to_not have_content(medication_1.name)
+      expect(page).to_not have_content(medication_2.name)
+      expect(page).to have_content(medication_3.name)
+      expect(page).to have_content(medication_4.name)
+    end
+  end
+
 end
