@@ -1,0 +1,24 @@
+<h1><%= @pharmacy.name %></h1>
+<h2>New Medication Form </h2><br>
+<%= form_with url:"/pharmacies/#{@pharmacy.id}/medications", method: :post, local: :true do |form| %>
+  <%= form.label "Medication" %>
+  <%= form.text_field :name %><br><br>
+
+  <%= form.label "Strength" %>
+  <%= form.text_field :strength %><br><br>
+
+  <%= form.label "Dosage Form" %>
+  <%= form.text_field :dosage_form %><br><br>
+
+  <%= form.label "Quantity" %>
+  <%= form.number_field :quantity, in: 1..50000, step: 1%><br><br>
+
+  <%= form.label :in_stock %>
+  <%= form.radio_button :in_stock, true %>
+  <%= form.label :in_stock_true , "true" %>
+  <%= form.radio_button :in_stock, false %>
+  <%= form.label :in_stock_false , "false" %><br><br>
+
+  <%= form.submit "Create Medication" %>
+<% end %>
+

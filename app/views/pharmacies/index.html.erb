@@ -1,7 +1,7 @@
-<%= link_to "Pharmacies", "/pharmacies" %>
-<%= link_to "Medications", "/medications" %>
 <h1>Pharmacy Index Page</h1>
-<% @pharmacies.each do |pharmacy| %>
+<% @pharmacy.each do |pharmacy| %>
   <h3>Pharmacy: <%= pharmacy.name %></h3>
-  <p>Created at: <%= pharmacy.created_at %></p><br>
+  <p>Created at: <%= pharmacy.created_at %></p>
+  <%= link_to "Edit #{pharmacy.name}", "/pharmacies/#{pharmacy.id}/edit" %><br><br><br>
 <% end %>
+<%= link_to "Create New Pharmacy", "/pharmacies/new" %>

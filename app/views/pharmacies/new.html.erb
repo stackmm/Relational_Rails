@@ -1,0 +1,21 @@
+<%= form_with url:"/pharmacies", method: :post, local: :true do |form| %>
+  <%= form.label "Name" %>
+  <%= form.text_field :name %><br>
+
+  <%= form.label "Pharmacist" %>
+  <%= form.text_field :pharmacist_in_charge %><br>
+
+  <%= form.label "Number of Employees" %>
+  <%= form.number_field :num_employees, in: 1..50, step: 1%><br>
+
+  <%= form.label "City" %>
+  <%= form.text_field :city%><br>
+
+  <%= form.label :open_24_hours %>
+  <%= form.radio_button :open_24_hours, true %>
+  <%= form.label :open_24_hours_true , "true" %>
+  <%= form.radio_button :open_24_hours, false %>
+  <%= form.label :open_24_hours_false , "false" %><br>
+
+  <%= form.submit "Create Pharmacy" %>
+<% end %>
