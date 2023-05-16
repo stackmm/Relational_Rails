@@ -1,7 +1,6 @@
 class Pharmacies::MedicationsController < ApplicationController
   def index
     @pharmacy = Pharmacy.find(params[:id])
-    # @medications = @pharmacy.medications
     @medications = @pharmacy.sort_alphabetically(params)
   end
 
@@ -12,16 +11,12 @@ class Pharmacies::MedicationsController < ApplicationController
   def create
     @pharmacy = Pharmacy.find(params[:id])
 
-    medication = @pharmacy.medications.new({
-      name: params[:name],
-      strength: params[:strength],
-      dosage_form: params[:dosage_form],
-      quantity: params[:quantity],
-      in_stock: params[:in_stock]
-    })
-
-    medication.save
-
+    @pharmacy.medications.create(medication_params)
     redirect_to "/pharmacies/#{@pharmacy.id}/medications"
+  end
+
+  private
+  def medication_params
+    params.permit(:name, :strength, :dosage_form, :quantity, :in_stock)
   end
 end

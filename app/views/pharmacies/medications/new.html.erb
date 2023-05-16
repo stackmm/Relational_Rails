@@ -1,19 +1,24 @@
 <h1><%= @pharmacy.name %></h1>
 <h2>New Medication Form </h2><br>
-<form action="/pharmacies/<%=@pharmacy.id%>/medications" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  Medication:
-  <input type='text' name="name"/><br/><br/>
-  Strength:
-  <input type='text' name="strength"/><br/><br/>
-  Dosage Form:
-  <input type='text' name="dosage_form"/><br/><br/>
-  Quantity:
-  <input type='number' name="quantity"/><br/><br/>
-  <p>In Stock:?</p>
-  <input type='radio' name='in_stock' value =true id = "true" required/>
-  <label for ="true">True</label>
-  <input type='radio' name='in_stock' value =false id = "false" />
-  <label for ="false">False</label><br/><br><br>
-  <input type="submit" value="Create Medication" id="submit"/>
-</form>
+<%= form_with url:"/pharmacies/#{@pharmacy.id}/medications", method: :post, local: :true do |form| %>
+  <%= form.label "Medication" %>
+  <%= form.text_field :name %><br><br>
+
+  <%= form.label "Strength" %>
+  <%= form.text_field :strength %><br><br>
+
+  <%= form.label "Dosage Form" %>
+  <%= form.text_field :dosage_form %><br><br>
+
+  <%= form.label "Quantity" %>
+  <%= form.number_field :quantity, in: 1..50000, step: 1%><br><br>
+
+  <%= form.label :in_stock %>
+  <%= form.radio_button :in_stock, true %>
+  <%= form.label :in_stock_true , "true" %>
+  <%= form.radio_button :in_stock, false %>
+  <%= form.label :in_stock_false , "false" %><br><br>
+
+  <%= form.submit "Create Medication" %>
+<% end %>
+

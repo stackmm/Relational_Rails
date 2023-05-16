@@ -1,10 +1,9 @@
-<%= link_to "Pharmacies", "/pharmacies" %>
-<%= link_to "Medications", "/medications" %>
-<h1>Medication Index Page</h1>
+<h1>Medications</h1>
 <% @medications.each do |medication| %>
   <h2><%= medication.name %></h2>
   <p>Strength: <%= medication.strength %></p>
   <p>Dosage Form: <%= medication.dosage_form %></p>
   <p>Quantity: <%= medication.quantity %></p>
   <p>In Stock: <%= medication.in_stock %></p>
+  <p>ID: <%= medication.id %></p>
 <% end %>

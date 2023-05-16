@@ -1,11 +1,10 @@
-<%= link_to "Pharmacies", "/pharmacies" %>
-<%= link_to "Medications", "/medications" %>
 <% @medications.each do |medication| %>
   <h2><%= medication.name %></h2>
   <p>Strength: <%= medication.strength %></p>
   <p>Dosage Form: <%= medication.dosage_form %></p>
   <p>Quantity: <%= medication.quantity %></p>
   <p>In Stock: <%= medication.in_stock %></p>
+  <p>ID: <%= medication.id %></p>
 <% end %>
 <p><a id ="Sort Alphabetically" href="/pharmacies/<%=@pharmacy.id%>/medications/?sort=true">Sort Alphabetically</a></p>
 <%= link_to "Add Medication", "/pharmacies/#{@pharmacy.id}/medications/new"%>

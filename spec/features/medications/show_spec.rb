@@ -8,7 +8,7 @@ RSpec.describe "/medications/:id", type: :feature do
     let!(:medication_1) {pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
     let!(:medication_2) {pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
   
-    it "displays that medication and it's attributes" do
+    it "displays the medication associated with that ID and it's attributes" do
       visit "/medications/#{medication_1.id}"
 
       expect(page).to have_content(medication_1.name)
@@ -37,13 +37,11 @@ RSpec.describe "/medications/:id", type: :feature do
   
     it "displays a link to update that medication" do
       visit "/medications/#{medication_1.id}"
-
       expect(page).to have_content("Update Medication")
     end
 
     it "when I click on the link, I am taken to /medications/:id/edit" do
       visit "/medications/#{medication_1.id}"
-
       click_on("Update Medication")
       expect(page).to have_current_path("/medications/#{medication_1.id}/edit")
     end
@@ -53,21 +51,22 @@ RSpec.describe "/medications/:id", type: :feature do
 
       expect(page).to have_content("Medication")
       expect(page).to have_content("Strength")
-      expect(page).to have_content("Dosage Form")
+      expect(page).to have_content("Dosage form")
       expect(page).to have_content("Quantity")
-      expect(page).to have_content("In Stock")
+      expect(page).to have_content("In stock")
     end
 
-    it "after I edit the attributes and submit, a PATCH request is sent and redirected to the show page" do
+    it "after I edit the attributes and submit, the medication attributes are updated and I am redirected to the show page" do
       visit "/medications/#{medication_1.id}/edit"
 
+      fill_in("name", with: "Amoxicillin")
       fill_in("strength", with: "250 mg")
       fill_in("dosage_form", with: "capsule")
       fill_in("quantity", with: 0)
       choose("false")
-      
-      click_on("Update Medication")
 
+      click_on("Update Medication")
+      
       expect(page).to have_current_path("/medications/#{medication_1.id}")
       expect(page).to have_content("Amoxicillin")
       expect(page).to have_content("250 mg")

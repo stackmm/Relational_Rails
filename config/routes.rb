@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "/pharmacies/:id", to: "pharmacies#show"
   get "/pharmacies/:id/edit", to: "pharmacies#edit"
 
+  
   get "/pharmacies/:id/medications", to: "pharmacies/medications#index"
   get "/pharmacies/:id/medications/new", to: "pharmacies/medications#new"
   post "/pharmacies/:id/medications", to: "pharmacies/medications#create"
