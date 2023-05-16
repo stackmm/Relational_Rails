@@ -17,6 +17,11 @@ class MedicationsController < ApplicationController
     redirect_to "/medications/#{medication.id}"
   end
 
+  def destroy
+    Medication.destroy(params[:id])
+    redirect_to "/medications"
+  end
+
   private
     def medication_params
       params.permit(:name, :strength, :dosage_form, :quantity, :in_stock)

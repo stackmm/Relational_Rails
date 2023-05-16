@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get "/medications/:id", to: "medications#show"
   get "/medications/:id/edit", to: "medications#edit"
   patch "/medications/:id", to: "medications#update"
+  delete "/medications/:id", to: "medications#destroy"
 end

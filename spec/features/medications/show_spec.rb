@@ -76,4 +76,29 @@ RSpec.describe "/medications/:id", type: :feature do
     end
   end
 
+  # User Story 20
+  describe "as a visitor, when I visit /medications/:id" do 
+    let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:medication_1) { pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
+    let!(:medication_2) { pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
+
+    it "displays a Delete Medication button" do
+      visit "/medications/#{medication_1.id}"
+      expect(page).to have_selector(:button, "Delete Medication")
+    end
+
+    it "when I click Delete Medication, the medication is deleted and redirected to /medications" do
+      visit "/medications"
+      expect(page).to have_content(medication_1.name)
+      expect(page).to have_content(medication_2.name)
+
+      visit "/medications/#{medication_1.id}"
+      click_button("Delete Medication")
+      
+      expect(page).to have_current_path("/medications")
+      expect(page).to_not have_content(medication_1.name)
+      expect(page).to have_content(medication_2.name)
+    end
+  end
+
 end

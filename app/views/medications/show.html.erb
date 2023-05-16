@@ -3,4 +3,5 @@
 <p>Dosage Form: <%= @medications.dosage_form %></p>
 <p>Quantity: <%= @medications.quantity %></p>
 <p>In Stock: <%= @medications.in_stock %></p>
-<%= link_to "Update Medication", "/medications/#{@medications.id}/edit" %>
+<%= link_to "Update Medication", "/medications/#{@medications.id}/edit" %><br><br>
+<%= button_to "Delete Medication", "/medications/#{@medications.id}", method: :delete%>
