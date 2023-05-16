@@ -6,6 +6,7 @@
   <p>In Stock: <%= medication.in_stock %></p>
   <p>ID: <%= medication.id %></p>
   <%= button_to "Delete #{medication.name}", "/medications/#{medication.id}", method: :delete%><br>
+  <%= link_to "Edit #{medication.name}", "/medications/#{medication.id}/edit" %><br><br><br>
 <% end %>
 <p><a id ="Sort Alphabetically" href="/pharmacies/<%=@pharmacy.id%>/medications/?sort=true">Sort Alphabetically</a></p>
 <%= link_to "Add Medication", "/pharmacies/#{@pharmacy.id}/medications/new"%><br><br>

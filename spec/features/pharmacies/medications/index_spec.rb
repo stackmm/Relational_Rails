@@ -108,6 +108,44 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
     end
   end
 
+  # User Story 18
+  describe "as a visitor, when I visit /pharmacies/:id/medications" do
+    let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:medication_1) {pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
+    let!(:medication_2) {pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
+    
+    it "next to every medication, I see a link to edit that medication's info" do
+      visit "/pharmacies/#{pharmacy_1.id}/medications"
+      expect(page).to have_content("Edit #{medication_1.name}")
+      expect(page).to have_content("Edit #{medication_2.name}")
+    end
+
+    it "when I click the edit link, I am taken to /medications/:id/edit" do
+      visit "/pharmacies/#{pharmacy_1.id}/medications"
+      click_on("Edit #{medication_1.name}")
+      expect(page).to have_current_path("/medications/#{medication_1.id}/edit")
+    end
+
+    it "when I fill out the form with updated information and click submit, /medications/:id is updated" do
+      visit "/medications/#{medication_1.id}/edit"
+
+      fill_in("name", with: "Amoxicillin")
+      fill_in("strength", with: "250 mg")
+      fill_in("dosage_form", with: "capsule")
+      fill_in("quantity", with: 0)
+      choose("false")
+
+      click_on("Update Medication")
+
+      expect(page).to have_current_path("/medications/#{medication_1.id}")
+      expect(page).to have_content("Amoxicillin")
+      expect(page).to have_content("250 mg")
+      expect(page).to have_content("capsule")
+      expect(page).to have_content(0)
+      expect(page).to have_content(false)
+    end
+  end
+
   # User Story 21
   describe "as a visitor, when I visit /pharmacies/:id/medications" do
     let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
