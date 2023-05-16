@@ -76,5 +76,48 @@ RSpec.describe "/pharmacies", type: :feature do
       expect(page).to have_content("Stackhouse Pharmacy")
       expect(page).to have_current_path("/pharmacies")
     end
-  end   
+  end
+
+  # User Story 17
+  describe "as a visitor, when I visit /pharmacies index page" do
+    let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:pharmacy_2) { Pharmacy.create!(name: "UCHealth", pharmacist_in_charge: "Max Anderson", num_employees: 22, city: "Denver", open_24_hours: false)}  
+    let!(:pharmacy_3) { Pharmacy.create!(name: "CVS", pharmacist_in_charge: "John Lennon", num_employees: 7, city: "Fort Collins", open_24_hours: true)}
+
+    it "displays an edit link next to every Pharmacy" do 
+      visit "/pharmacies"
+
+      expect(page).to have_content(pharmacy_1.name)
+      expect(page).to have_content("Edit #{pharmacy_1.name}")
+      expect(page).to have_content(pharmacy_2.name)
+      expect(page).to have_content("Edit #{pharmacy_2.name}")
+      expect(page).to have_content(pharmacy_3.name)
+      expect(page).to have_content("Edit #{pharmacy_3.name}")
+    end
+
+    it "when I click edit, displays the Pharmacy's edit page at /pharmacies/:id/edit" do
+      visit "/pharmacies"
+      click_on("Edit #{pharmacy_1.name}")
+      expect(current_path).to eq("/pharmacies/#{pharmacy_1.id}/edit")
+    end
+
+    it "when I fill out the form with updated information and click submit, /pharmacies/:id is updated" do
+      visit "/pharmacies/#{pharmacy_1.id}/edit"
+
+      fill_in("name", with: "Not Walgreens")
+      fill_in("pharmacist_in_charge", with: "Kim Jong Un")
+      fill_in("num_employees", with: 1)
+      fill_in("city", with: "Kim Jong Un")
+      choose("false")
+      click_on("Update Pharmacy")
+
+      expect(page).to have_current_path("/pharmacies/#{pharmacy_1.id}")
+      expect(page).to have_content("Not Walgreens")
+      expect(page).to have_content("Kim Jong Un")
+      expect(page).to have_content(1)
+      expect(page).to have_content("Kim Jong Un")
+      expect(page).to have_content(false)
+    end
+  end
+
 end

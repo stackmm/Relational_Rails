@@ -83,11 +83,11 @@ RSpec.describe "/pharmacies/:id", type: :feature do
 
       click_link("Update Pharmacy")
       expect(page).to have_current_path("/pharmacies/#{pharmacy_1.id}/edit")
-      expect(page).to have_content("Pharmacy Name")
-      expect(page).to have_content("Pharmacist:")
-      expect(page).to have_content("Number of Employees:")
-      expect(page).to have_content("City:")
-      expect(page).to have_content("Open 24 Hours?")
+      expect(page).to have_content("Pharmacy name")
+      expect(page).to have_content("Pharmacist")
+      expect(page).to have_content("Number of employees")
+      expect(page).to have_content("City")
+      expect(page).to have_content("Open 24 hours")
     end
 
     it "when I fill out the form and click submit, then that Pharmacy's info is updated and I am redirect to it's show page" do
@@ -98,7 +98,7 @@ RSpec.describe "/pharmacies/:id", type: :feature do
       fill_in("num_employees", with: 12)
       fill_in("city", with: "Fort Collins")
       choose('true')
-      click_on("Submit")
+      click_on("Update Pharmacy")
 
       expect(page).to have_current_path("/pharmacies/#{pharmacy_1.id}")
       expect(page).to have_content("Awesome Pharmacy")

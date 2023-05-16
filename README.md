@@ -160,7 +160,7 @@ Then I see a link to sort children in alphabetical order
 When I click on the link
 I'm taken back to the Parent's children Index Page where I see all of the parent's children in alphabetical order
 
-[ ] User Story 17, Parent Update From Parent Index Page 
+[x] User Story 17, Parent Update From Parent Index Page 
 
 As a visitor
 When I visit the parent index page
