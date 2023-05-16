@@ -105,7 +105,6 @@ RSpec.describe "/pharmacies/:id/medications", type: :feature do
       expect(medication_4.name).to appear_before(medication_6.name)
       expect(medication_6.name).to appear_before(medication_2.name)
       expect(medication_2.name).to appear_before(medication_3.name)
-      save_and_open_page
     end
   end
 

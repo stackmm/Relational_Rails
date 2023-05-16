@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "/pharmacies", type: :feature do
+  
   # User Story 1
   describe "as a visitor, when I visit /pharmacies index page" do
     let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
@@ -151,5 +152,4 @@ RSpec.describe "/pharmacies", type: :feature do
       expect(page).to have_selector(:button, "Delete #{pharmacy_3.name}")
     end
   end
-
 end

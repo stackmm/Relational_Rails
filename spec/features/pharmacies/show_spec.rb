@@ -25,7 +25,7 @@ RSpec.describe "/pharmacies/:id", type: :feature do
   end
 
   # User Story 7
-  describe "as a visitor, when I visit a Pharmacy's show page" do
+  describe "as a visitor, when I visit /pharmacies/:id" do
     let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
     let!(:pharmacy_2) { Pharmacy.create!(name: "UCHealth", pharmacist_in_charge: "Max Anderson", num_employees: 22, city: "Denver", open_24_hours: false)}
     let!(:medication_1) { pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
@@ -46,7 +46,7 @@ RSpec.describe "/pharmacies/:id", type: :feature do
   end
 
   # User Story 10
-  describe "as a visitor, when I visit a Pharmacy's show page" do
+  describe "as a visitor, when I visit /pharmacies/:id" do
     let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
     let!(:medication_1) { pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
     let!(:medication_2) { pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
@@ -62,7 +62,7 @@ RSpec.describe "/pharmacies/:id", type: :feature do
   end
 
   # User Story 12
-  describe "as a visitor, when I visit a Pharmacy's show page" do
+  describe "as a visitor, when I visit /pharmacies/:id" do
     let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: false)}
     
     it "displays a link to update the pharmacy" do
@@ -110,7 +110,7 @@ RSpec.describe "/pharmacies/:id", type: :feature do
   end
 
   # User Story 19
-  describe "as a visitor, when I visit Pharmacy's show page" do 
+  describe "as a visitor, when I visit /pharmacies/:id" do 
     let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
     let!(:medication_1) { pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
     let!(:medication_2) { pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
@@ -149,5 +149,4 @@ RSpec.describe "/pharmacies/:id", type: :feature do
       expect(page).to have_content(medication_4.name)
     end
   end
-
 end

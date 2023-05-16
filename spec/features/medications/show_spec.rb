@@ -100,5 +100,4 @@ RSpec.describe "/medications/:id", type: :feature do
       expect(page).to have_content(medication_2.name)
     end
   end
-
 end

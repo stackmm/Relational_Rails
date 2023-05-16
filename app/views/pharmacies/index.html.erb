@@ -1,6 +1,7 @@
 <h1>Pharmacy Index Page</h1>
 <% @pharmacy.each do |pharmacy| %>
   <h3>Pharmacy: <%= pharmacy.name %></h3>
+  <p>ID: <%= pharmacy.id %></p>
   <p>Created at: <%= pharmacy.created_at %></p>
   <%= link_to "Edit #{pharmacy.name}", "/pharmacies/#{pharmacy.id}/edit" %><br><br>
   <%= button_to "Delete #{pharmacy.name}", "/pharmacies/#{pharmacy.id}", method: :delete%><br>
