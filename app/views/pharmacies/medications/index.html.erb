@@ -8,11 +8,6 @@
   <%= button_to "Delete #{medication.name}", "/medications/#{medication.id}", method: :delete%><br>
   <%= link_to "Edit #{medication.name}", "/medications/#{medication.id}/edit" %><br><br><br>
 <% end %>
-<p><a id ="Sort Alphabetically" href="/pharmacies/<%=@pharmacy.id%>/medications/?sort=true">Sort Alphabetically</a></p>
+<%= link_to "Sort Alphabetically", "/pharmacies/#{@pharmacy.id}/medications?sort=true"%><br><br>
 <%= link_to "Add Medication", "/pharmacies/#{@pharmacy.id}/medications/new"%><br><br>
-
-<form action="/pharmacies/<%= @pharmacy.id %>/medications/?quantity=">
-<label>Return medications with quantity greater than:</label>
-<input type = "number" id="filter_quantity" placeholder = "0" name="quantity" required>
-<input type="submit" value="Filter" id="submit">
 </form>

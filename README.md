@@ -199,7 +199,7 @@ Then a 'DELETE' request is sent to '/child_table_name/:id',
 the child is deleted,
 and I am redirected to the child index page where I no longer see this child
 
-[x] User Story 21, Display Records Over a Given Threshold 
+[] User Story 21, Display Records Over a Given Threshold 
 
 As a visitor
 When I visit the Parent's children Index Page

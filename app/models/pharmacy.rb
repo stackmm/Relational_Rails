@@ -11,15 +11,9 @@ class Pharmacy < ApplicationRecord
 
   def sort_alphabetically(params)
     @medications = self.medications
-
-    if params['quantity']
-      @medications = @medications.where("quantity > #{params['quantity']}")
-    end
-
     if params['sort']
       @medications = @medications.order(:name)
     end
-
     @medications
   end
 end
