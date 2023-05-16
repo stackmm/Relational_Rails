@@ -6,4 +6,5 @@
 <p>Open 24 Hours: <%= @pharmacy.open_24_hours %></p>
 <p>Medication Count: <%= @pharmacy.count_medications %></p>
 <%= link_to "#{@pharmacy.name}'s Medications", "/pharmacies/#{@pharmacy.id}/medications" %></br></br>
-<%= link_to "Update Pharmacy", "/pharmacies/#{@pharmacy.id}/edit"%>
+<%= link_to "Update Pharmacy", "/pharmacies/#{@pharmacy.id}/edit"%><br><br>
+<%= button_to "Delete Pharmacy", "/pharmacies/#{@pharmacy.id}", method: :delete%>

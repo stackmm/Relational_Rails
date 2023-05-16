@@ -104,4 +104,37 @@ RSpec.describe "/medications", type: :feature do
       expect(page).to have_content(false)
     end
   end
+
+  # User Story 23
+  describe "as a visitor, when I visit /medications index page" do
+    let!(:pharmacy_1) {Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:medication_1) {pharmacy_1.medications.create!(name: "Amoxicillin", strength: "500 mg", dosage_form: "tablet", quantity: 5000, in_stock: true)}
+    let!(:medication_2) {pharmacy_1.medications.create!(name: "Penicillin VK", strength: "250 mg", dosage_form: "tablet", quantity: 400, in_stock: true)}
+    let!(:medication_3) {pharmacy_1.medications.create!(name: "Vancomycin", strength: "1000 mg", dosage_form: "intravenous solution", quantity: 20, in_stock: true)}
+    
+    it "displays a link to delete each Medication" do
+      visit "/medications"
+
+      expect(page).to have_content(medication_1.name)
+      expect(page).to have_content(medication_2.name)
+      expect(page).to have_content(medication_3.name)
+      expect(page).to have_selector(:button, "Delete #{medication_1.name}")
+      expect(page).to have_selector(:button, "Delete #{medication_2.name}")
+      expect(page).to have_selector(:button, "Delete #{medication_3.name}")
+    end
+
+    it "when I click delete, I am taken to /medications index page where I no longer see that medication" do
+      visit "/medications"
+
+      click_button("Delete #{medication_1.name}")
+      expect(page).to have_current_path("/medications")
+      expect(page).to_not have_content(medication_1.name)
+      expect(page).to_not have_selector(:button, "Delete #{medication_1.name}")
+
+      expect(page).to have_content(medication_2.name)
+      expect(page).to have_content(medication_3.name)
+      expect(page).to have_selector(:button, "Delete #{medication_2.name}")
+      expect(page).to have_selector(:button, "Delete #{medication_3.name}")
+    end
+  end
 end

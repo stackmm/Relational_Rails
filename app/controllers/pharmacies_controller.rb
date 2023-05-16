@@ -25,12 +25,12 @@ class PharmaciesController < ApplicationController
     redirect_to "/pharmacies/#{pharmacy.id}"
   end
 
-  # def destroy
-  #  pharmacy = Pharmacy.find(params[:id])
-  # pharmacy.medications.destroy_all
-  # pharmacy.destroy
-  # redirect_to "/pharmacies"
-  # end
+  def destroy
+    pharmacy = Pharmacy.find(params[:id])
+    pharmacy.medications.destroy_all
+    pharmacy.destroy
+    redirect_to "/pharmacies"
+  end
 
   private 
     def pharmacy_params

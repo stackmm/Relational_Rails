@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "/pharmacies", type: :feature do
+  
   # User Story 1
   describe "as a visitor, when I visit /pharmacies index page" do
     let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
@@ -120,4 +121,35 @@ RSpec.describe "/pharmacies", type: :feature do
     end
   end
 
+  # User Story 22
+  describe "as a visitor, when I visit /pharmacies index page" do
+    let!(:pharmacy_1) { Pharmacy.create!(name: "Walgreens", pharmacist_in_charge: "John Smith", num_employees: 9, city: "Toronto", open_24_hours: true)}
+    let!(:pharmacy_2) { Pharmacy.create!(name: "UCHealth", pharmacist_in_charge: "Max Anderson", num_employees: 22, city: "Denver", open_24_hours: false)}  
+    let!(:pharmacy_3) { Pharmacy.create!(name: "CVS", pharmacist_in_charge: "John Lennon", num_employees: 7, city: "Fort Collins", open_24_hours: true)}
+
+    it "displays a link to delete each Pharmacy" do
+      visit "/pharmacies"
+
+      expect(page).to have_content(pharmacy_1.name)
+      expect(page).to have_content(pharmacy_2.name)
+      expect(page).to have_content(pharmacy_3.name)
+      expect(page).to have_selector(:button, "Delete #{pharmacy_1.name}")
+      expect(page).to have_selector(:button, "Delete #{pharmacy_2.name}")
+      expect(page).to have_selector(:button, "Delete #{pharmacy_3.name}")
+    end
+
+    it "when I click Delete, I am returned to /pharmacies and I no longer see that Pharmacy" do
+      visit "/pharmacies"
+
+      click_button("Delete #{pharmacy_1.name}")
+      expect(page).to have_current_path("/pharmacies")
+      expect(page).to_not have_content(pharmacy_1.name)
+      expect(page).to_not have_selector(:button, "Delete #{pharmacy_1.name}")
+
+      expect(page).to have_content(pharmacy_2.name)
+      expect(page).to have_content(pharmacy_3.name)
+      expect(page).to have_selector(:button, "Delete #{pharmacy_2.name}")
+      expect(page).to have_selector(:button, "Delete #{pharmacy_3.name}")
+    end
+  end
 end

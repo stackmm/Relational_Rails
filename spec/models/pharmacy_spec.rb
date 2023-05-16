@@ -26,5 +26,4 @@ RSpec.describe Pharmacy, type: :model do
       expect(pharmacy_1.sort_alphabetically(params)).to eq([medication_1,medication_3,medication_2])
     end
   end
-
 end
